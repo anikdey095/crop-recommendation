@@ -1,0 +1,23 @@
+{
+  "name": "crop-recommendation-system",
+  "version": "2.0.0",
+  "description": "Production-ready Crop Recommendation System powered by Machine Learning (99.55% accuracy) with Vercel serverless deployment.",
+  "scripts": {
+    "start": "python app.py",
+    "dev": "python app.py",
+    "train": "python train.py",
+    "test": "python test_app.py"
+  },
+  "keywords": [
+    "crop-recommendation",
+    "machine-learning",
+    "agriculture",
+    "precision-farming",
+    "vercel",
+    "random-forest",
+    "flask",
+    "scikit-learn"
+  ],
+  "author": "anikdey095",
+  "license": "MIT"
+}

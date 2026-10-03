@@ -1,0 +1,802 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CropPulse AI — Precision Crop Recommendation System</title>
+  <meta name="description" content="AI-powered precision crop recommendation platform trained on 2,200 soil and climate samples with 99.55% accuracy. Optimize crop yield with data-driven agronomic advice.">
+  <meta name="keywords" content="crop recommendation, agriculture AI, soil testing, NPK analysis, farming advisory, machine learning, precision farming">
+  <meta name="author" content="anikdey095">
+  <meta property="og:title" content="CropPulse AI — Precision Crop Recommendation System">
+  <meta property="og:description" content="State-of-the-art agricultural machine learning platform delivering 99.55% accurate crop recommendations based on soil NPK, temperature, humidity, pH, and rainfall.">
+  <meta property="og:type" content="website">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Top Navigation Bar -->
+  <header class="navbar" id="main-nav">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-group" id="brand-link">
+        <div class="brand-icon-box">🌾</div>
+        <div class="brand-titles">
+          <div class="brand-name">
+            CropPulse AI
+            <span class="brand-badge">PROD</span>
+          </div>
+          <div class="brand-tagline">Precision Agriculture Advisory</div>
+        </div>
+      </a>
+
+      <!-- Navigation Tabs -->
+      <nav class="nav-tabs" role="tablist">
+        <button class="nav-tab-btn active" id="tab-btn-predictor" data-tab="tab-predictor" role="tab" aria-selected="true">
+          🌱 Input Form & Predictor
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-encyclopedia" data-tab="tab-encyclopedia" role="tab" aria-selected="false">
+          📖 22 Crops
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-analytics" data-tab="tab-analytics" role="tab" aria-selected="false">
+          📊 Model & Data
+        </button>
+        <button class="nav-tab-btn" id="tab-btn-api" data-tab="tab-api" role="tab" aria-selected="false">
+          ⚡ API & Docs
+        </button>
+      </nav>
+
+      <!-- Right Nav Actions -->
+      <div class="nav-actions">
+        <div class="status-indicator" title="Random Forest Ensemble Active">
+          <div class="pulse-dot"></div>
+          <span>99.55% Acc</span>
+        </div>
+        <button class="theme-toggle-btn" id="theme-toggle" title="Toggle Theme" aria-label="Toggle Dark and Light Mode">
+          🌓
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- ==================== TAB 1: PREDICTOR & INPUT FORM ==================== -->
+    <div class="tab-content active" id="tab-predictor">
+      
+      <!-- Hero Header - Compact & Focused -->
+      <section class="hero-section" id="hero-heading-section">
+        <div class="hero-header-flex">
+          <div>
+            <div class="hero-pill">
+              <span>✨</span> Machine Learning Precision Agriculture (99.55% Accuracy)
+            </div>
+            <h1 class="hero-title">
+              Crop Recommendation <span>Input System</span>
+            </h1>
+            <p class="hero-desc">
+              Enter your soil test values and climate parameters below to get instant data-driven crop recommendations.
+            </p>
+          </div>
+          <a href="#input-section-anchor" class="hero-cta-btn">
+            ✍️ Jump to Input Fields
+          </a>
+        </div>
+      </section>
+
+      <!-- Quick Scenario Presets Toolbar -->
+      <section class="presets-card" id="presets-toolbar">
+        <div class="presets-header">
+          <div class="presets-title">
+            <span>⚡</span> One-Click Presets & Field Scenarios
+          </div>
+          <div class="weather-autofill-box">
+            <input type="text" id="weather-city-input" class="weather-city-input" placeholder="Enter City (e.g. Dhaka)" aria-label="City name for weather autofill">
+            <button class="weather-fetch-btn" id="btn-fetch-weather" title="Fetch live climate for this location">
+              🌤️ Auto-Fill Weather
+            </button>
+            <button class="weather-fetch-btn" id="btn-geolocation" title="Use current GPS location">
+              📍 GPS
+            </button>
+          </div>
+        </div>
+
+        <div class="presets-scroll-wrapper" id="presets-container">
+          <!-- Dynamically populated from /api/presets -->
+          <button class="preset-chip active" data-preset="monsoon_rice">🍚 Monsoon Rice</button>
+          <button class="preset-chip" data-preset="highland_coffee">☕ Highland Coffee</button>
+          <button class="preset-chip" data-preset="black_cotton">🌿 Black Soil Cotton</button>
+          <button class="preset-chip" data-preset="golden_jute">🌾 Golden Jute</button>
+          <button class="preset-chip" data-preset="temperate_apple">🍎 Temperate Apple</button>
+          <button class="preset-chip" data-preset="tropical_banana">🍌 Tropical Banana</button>
+          <button class="preset-chip" data-preset="coastal_coconut">🥥 Coastal Coconut</button>
+          <button class="preset-chip" data-preset="summer_watermelon">🍉 Summer Watermelon</button>
+          <button class="preset-chip" data-preset="dryland_chickpea">🧆 Dryland Chickpea</button>
+          <button class="preset-chip" data-preset="fertile_maize">🌽 Fertile Maize</button>
+        </div>
+      </section>
+
+      <!-- Prominent Input Section Spotlight Banner -->
+      <div class="input-section-spotlight" id="input-section-anchor">
+        <div class="spotlight-badge">
+          <span class="spotlight-dot"></span>
+          ✍️ ACTIVE INPUT SECTION: 7 PARAMETERS
+        </div>
+        <div class="spotlight-hint">
+          ✏️ Type your soil & climate numbers directly into the boxes below or drag the sliders.
+        </div>
+      </div>
+
+      <!-- Main Prediction Grid -->
+      <section class="predictor-grid" id="predictor-interface">
+        
+        <!-- Left Column: Input Studio -->
+        <div class="studio-panel">
+          
+          <!-- Card 1: Soil Nutrients (NPK) -->
+          <div class="card-glass" id="card-soil-nutrients">
+            <div class="card-header-flex">
+              <div class="card-title-group">
+                <div class="card-icon-pill soil">🧪</div>
+                <div>
+                  <h2 class="card-title">1. Soil Nutrients Input Section (NPK)</h2>
+                  <div class="card-subtitle">Type your lab values directly into boxes or drag sliders (kg/ha)</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Nitrogen (N) -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-N" class="input-label-title">
+                  <span>🌱 Nitrogen (N) Level</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 0 - 140 kg/ha</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-N" class="custom-slider" min="0" max="140" step="1" value="90" title="Slide to adjust Nitrogen">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('N', -5)" title="Decrease Nitrogen">-</button>
+                  <input type="number" id="input-N" class="number-box" min="0" max="140" step="1" value="90" placeholder="90" aria-label="Nitrogen in kg/ha">
+                  <button type="button" class="stepper-btn" onclick="stepInput('N', 5)" title="Increase Nitrogen">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Vegetative Growth Indicator</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">50.6 kg/ha</strong></span>
+              </div>
+            </div>
+
+            <!-- Phosphorus (P) -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-P" class="input-label-title">
+                  <span>🌸 Phosphorus (P) Level</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 5 - 145 kg/ha</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-P" class="custom-slider" min="5" max="145" step="1" value="42" title="Slide to adjust Phosphorus">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('P', -5)" title="Decrease Phosphorus">-</button>
+                  <input type="number" id="input-P" class="number-box" min="5" max="145" step="1" value="42" placeholder="42" aria-label="Phosphorus in kg/ha">
+                  <button type="button" class="stepper-btn" onclick="stepInput('P', 5)" title="Increase Phosphorus">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Root & Flowering Development</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">53.4 kg/ha</strong></span>
+              </div>
+            </div>
+
+            <!-- Potassium (K) -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-K" class="input-label-title">
+                  <span>🛡️ Potassium (K) Level</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 5 - 205 kg/ha</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-K" class="custom-slider" min="5" max="205" step="1" value="43" title="Slide to adjust Potassium">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('K', -5)" title="Decrease Potassium">-</button>
+                  <input type="number" id="input-K" class="number-box" min="5" max="205" step="1" value="43" placeholder="43" aria-label="Potassium in kg/ha">
+                  <button type="button" class="stepper-btn" onclick="stepInput('K', 5)" title="Increase Potassium">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Drought & Disease Resistance</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">48.1 kg/ha</strong></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Card 2: Climate & Soil pH -->
+          <div class="card-glass" id="card-climate-factors">
+            <div class="card-header-flex">
+              <div class="card-title-group">
+                <div class="card-icon-pill climate">🌦️</div>
+                <div>
+                  <h2 class="card-title">2. Environmental & Climate Input Section</h2>
+                  <div class="card-subtitle">Type ambient temperature, humidity, soil pH, and annual rainfall</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Temperature -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-temp" class="input-label-title">
+                  <span>🌡️ Temperature (°C)</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 8.0 - 45.0 °C</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-temp" class="custom-slider" min="8" max="45" step="0.1" value="20.9" title="Slide to adjust Temperature">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('temp', -1)" title="Decrease Temperature">-</button>
+                  <input type="number" id="input-temp" class="number-box" min="8" max="45" step="0.1" value="20.9" placeholder="20.9" aria-label="Temperature in Celsius">
+                  <button type="button" class="stepper-btn" onclick="stepInput('temp', 1)" title="Increase Temperature">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Ambient Air Temperature</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">25.6 °C</strong></span>
+              </div>
+            </div>
+
+            <!-- Relative Humidity -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-humidity" class="input-label-title">
+                  <span>💧 Relative Humidity (%)</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 10.0 - 100.0 %</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-humidity" class="custom-slider" min="10" max="100" step="0.1" value="82.0" title="Slide to adjust Humidity">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('humidity', -5)" title="Decrease Humidity">-</button>
+                  <input type="number" id="input-humidity" class="number-box" min="10" max="100" step="0.1" value="82.0" placeholder="82.0" aria-label="Relative Humidity in percent">
+                  <button type="button" class="stepper-btn" onclick="stepInput('humidity', 5)" title="Increase Humidity">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Atmospheric Moisture Level</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">71.5 %</strong></span>
+              </div>
+            </div>
+
+            <!-- Soil pH -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-ph" class="input-label-title">
+                  <span>⚗️ Soil pH (Acidity / Alkalinity)</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 3.5 - 10.0 pH</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-ph" class="custom-slider" min="3.5" max="10" step="0.1" value="6.5" title="Slide to adjust Soil pH">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('ph', -0.2)" title="Decrease pH">-</button>
+                  <input type="number" id="input-ph" class="number-box" min="3.5" max="10" step="0.1" value="6.5" placeholder="6.5" aria-label="Soil pH">
+                  <button type="button" class="stepper-btn" onclick="stepInput('ph', 0.2)" title="Increase pH">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span id="ph-status-label" style="color: var(--brand-emerald-light); font-weight: 600;">Slightly Acidic to Neutral (Optimal)</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">6.5 pH</strong></span>
+              </div>
+            </div>
+
+            <!-- Rainfall -->
+            <div class="input-row">
+              <div class="input-label-bar">
+                <label for="input-rainfall" class="input-label-title">
+                  <span>🌧️ Annual Rainfall (mm)</span>
+                </label>
+                <span class="input-unit-tag">Allowed: 20 - 300 mm</span>
+              </div>
+              <div class="input-controls-flex">
+                <input type="range" id="slider-rainfall" class="custom-slider" min="20" max="300" step="1" value="203" title="Slide to adjust Rainfall">
+                <div class="input-stepper-box">
+                  <button type="button" class="stepper-btn" onclick="stepInput('rainfall', -10)" title="Decrease Rainfall">-</button>
+                  <input type="number" id="input-rainfall" class="number-box" min="20" max="300" step="1" value="203" placeholder="203" aria-label="Rainfall in mm">
+                  <button type="button" class="stepper-btn" onclick="stepInput('rainfall', 10)" title="Increase Rainfall">+</button>
+                </div>
+              </div>
+              <div class="input-benchmark-bar">
+                <span>Precipitation Volume</span>
+                <span>Dataset Avg: <strong class="benchmark-marker">103.5 mm</strong></span>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Buttons Bar -->
+          <div class="form-actions-bar">
+            <button class="btn-primary-gradient" id="btn-predict">
+              <span>🌾</span> Run Precision Recommendation
+            </button>
+            <button class="btn-secondary" id="btn-randomize" title="Generate random viable conditions">
+              <span>🎲</span> Randomize Inputs
+            </button>
+            <button class="btn-secondary" id="btn-reset" title="Reset all inputs to defaults">
+              <span>🔄</span> Reset Form
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Recommendation Dossier -->
+        <div class="dossier-panel">
+          <div class="recommendation-card has-result" id="result-card">
+            <div class="card-glow-bg"></div>
+
+            <!-- Crop Hero Banner -->
+            <div class="crop-hero-banner">
+              <div class="crop-avatar-box" id="result-icon">🍚</div>
+              <div class="crop-hero-meta">
+                <span class="crop-hero-badge" id="result-category">Cereal / Grain</span>
+                <h3 class="crop-hero-name" id="result-name">Rice (Paddy)</h3>
+              </div>
+            </div>
+
+            <!-- Confidence Bar -->
+            <div class="confidence-bar-container">
+              <div class="confidence-header">
+                <span class="confidence-title">AI Confidence & Suitability</span>
+                <span class="confidence-percentage" id="result-confidence">91.7% Match</span>
+              </div>
+              <div class="progress-track">
+                <div class="progress-fill" id="result-progress" style="width: 91.7%;"></div>
+              </div>
+            </div>
+
+            <!-- Agronomic Specifications Grid -->
+            <div class="specs-grid">
+              <div class="spec-tile">
+                <div class="spec-label">📅 Sowing Season</div>
+                <div class="spec-value" id="result-season">Kharif (Monsoon)</div>
+              </div>
+              <div class="spec-tile">
+                <div class="spec-label">⏱️ Growth Period</div>
+                <div class="spec-value" id="result-duration">100 - 150 days</div>
+              </div>
+              <div class="spec-tile">
+                <div class="spec-label">💧 Water Need</div>
+                <div class="spec-value" id="result-water">High (Flooded / 5-10cm)</div>
+              </div>
+              <div class="spec-tile">
+                <div class="spec-label">🪴 Ideal Soil</div>
+                <div class="spec-value" id="result-soil">Clayey, Alluvial Soil</div>
+              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="advisory-box">
+              <div class="advisory-title">
+                <span>📋</span> Agronomic Overview
+              </div>
+              <p class="advisory-text" id="result-description">
+                Rice is the primary dietary staple for over half the world's population. It thrives in high humidity, prolonged rainfall, and warm temperatures.
+              </p>
+            </div>
+
+            <!-- Nutrient Diagnostics -->
+            <div class="alignment-section">
+              <div class="alignment-title">
+                <span>📊</span> Parameter Fit & Diagnostics
+              </div>
+              <div class="alignment-list" id="result-alignment-list">
+                <!-- Populated dynamically -->
+                <div class="alignment-item">
+                  <span class="alignment-item-param">Nitrogen (90 kg/ha)</span>
+                  <span class="alignment-status-badge badge-optimal">Optimal</span>
+                </div>
+                <div class="alignment-item">
+                  <span class="alignment-item-param">Phosphorus (42 kg/ha)</span>
+                  <span class="alignment-status-badge badge-optimal">Optimal</span>
+                </div>
+                <div class="alignment-item">
+                  <span class="alignment-item-param">Potassium (43 kg/ha)</span>
+                  <span class="alignment-status-badge badge-optimal">Optimal</span>
+                </div>
+                <div class="alignment-item">
+                  <span class="alignment-item-param">Rainfall (203 mm)</span>
+                  <span class="alignment-status-badge badge-optimal">Optimal</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Fertilizer Strategy -->
+            <div class="advisory-box" style="background: rgba(245, 158, 11, 0.06); border-color: rgba(245, 158, 11, 0.2);">
+              <div class="advisory-title" style="color: var(--accent-amber);">
+                <span>🌱</span> Fertilizer & Soil Guidance
+              </div>
+              <p class="advisory-text" id="result-fertilizer">
+                High Nitrogen (Split application: basal, tillering, panicle), moderate P & K. Ensure standing water during vegetative stage.
+              </p>
+            </div>
+
+            <!-- Top Alternatives -->
+            <div class="alternates-section" id="result-alternates-section">
+              <div class="alternates-header">Viable Secondary Alternative Crops:</div>
+              <div class="alternates-flex" id="result-alternates-flex">
+                <div class="alternate-pill" data-crop="jute">
+                  🌾 Jute <span class="alt-conf">(8.3%)</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Export Report Button -->
+            <button class="btn-secondary" id="btn-print-report" style="width: 100%; margin-top: 1.25rem;">
+              <span>🖨️</span> Save / Print Advisory Report
+            </button>
+
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+
+    <!-- ==================== TAB 2: ENCYCLOPEDIA (22 CROPS) ==================== -->
+    <div class="tab-content" id="tab-encyclopedia">
+      
+      <section class="hero-section">
+        <div class="hero-pill">
+          <span>📚</span> Complete Crop Database
+        </div>
+        <h2 class="hero-title">
+          Explore All <span>22 Supported Crops</span>
+        </h2>
+        <p class="hero-desc">
+          Browse the full spectrum of cereals, legumes, fruits, and plantation crops analyzed by the machine learning model. Click any crop card to load its ideal parameters directly into the recommendation engine.
+        </p>
+      </section>
+
+      <!-- Filter and Search Bar -->
+      <div class="encyclopedia-filter-bar">
+        <input type="text" id="crop-search-input" class="search-box-input" placeholder="Search crops (e.g. Rice, Coffee, Mango)...">
+        
+        <div class="category-filter-chips">
+          <button class="cat-filter-btn active" data-category="all">All Crops (22)</button>
+          <button class="cat-filter-btn" data-category="Cereal / Grain">Cereals</button>
+          <button class="cat-filter-btn" data-category="Pulse / Legume">Pulses & Legumes</button>
+          <button class="cat-filter-btn" data-category="Horticulture / Fruit">Fruits</button>
+          <button class="cat-filter-btn" data-category="Cash Crop">Cash & Fiber</button>
+        </div>
+      </div>
+
+      <!-- Crops Cards Grid -->
+      <div class="crops-cards-grid" id="encyclopedia-grid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 3: MODEL ANALYTICS & EDA ==================== -->
+    <div class="tab-content" id="tab-analytics">
+      
+      <section class="hero-section">
+        <div class="hero-pill">
+          <span>🔬</span> Machine Learning Benchmarks & Data Insights
+        </div>
+        <h2 class="hero-title">
+          Model Performance & <span>Feature Importance</span>
+        </h2>
+        <p class="hero-desc">
+          Trained on 2,200 multi-spectral agricultural samples across 22 classes. The Random Forest ensemble delivers 99.55% test accuracy with 5-fold cross-validation.
+        </p>
+      </section>
+
+      <!-- Big Metric Cards -->
+      <div class="metrics-stat-grid">
+        <div class="stat-metric-card">
+          <div class="stat-number">99.55%</div>
+          <div class="stat-title">Random Forest Test Accuracy</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-number">99.59%</div>
+          <div class="stat-title">5-Fold Stratified CV Mean</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-number">2,200</div>
+          <div class="stat-title">Balanced Soil/Climate Samples</div>
+        </div>
+        <div class="stat-metric-card">
+          <div class="stat-number">0.68ms</div>
+          <div class="stat-title">Serverless Inference Latency</div>
+        </div>
+      </div>
+
+      <!-- Comparison & Feature Importance Section -->
+      <div class="predictor-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 3rem;">
+        
+        <!-- Feature Importance Chart -->
+        <div class="card-glass">
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <div class="card-icon-pill soil">📊</div>
+              <div>
+                <h3 class="card-title">Feature Importance Ranking</h3>
+                <div class="card-subtitle">Gini impurity reduction contribution per parameter</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="feature-importance-list">
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>🌧️ Annual Rainfall</span>
+                <strong style="color: var(--brand-emerald-light);">23.39%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 23.39%; background: #06b6d4;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>💧 Relative Humidity</span>
+                <strong style="color: var(--brand-emerald-light);">22.55%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 22.55%; background: #38bdf8;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>🧪 Potassium (K)</span>
+                <strong style="color: var(--brand-emerald-light);">17.49%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 17.49%; background: #10b981;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>🧪 Phosphorus (P)</span>
+                <strong style="color: var(--brand-emerald-light);">15.04%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 15.04%; background: #34d399;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>🧪 Nitrogen (N)</span>
+                <strong style="color: var(--brand-emerald-light);">9.50%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 9.50%; background: #f59e0b;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>🌡️ Temperature</span>
+                <strong style="color: var(--brand-emerald-light);">7.27%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 7.27%; background: #f43f5e;"></div>
+              </div>
+            </div>
+
+            <div class="importance-bar-item">
+              <div class="importance-label-row">
+                <span>⚗️ Soil pH</span>
+                <strong style="color: var(--brand-emerald-light);">4.76%</strong>
+              </div>
+              <div class="importance-track">
+                <div class="importance-fill" style="width: 4.76%; background: #8b5cf6;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Algorithm Comparison Table -->
+        <div class="card-glass">
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <div class="card-icon-pill climate">🏆</div>
+              <div>
+                <h3 class="card-title">Algorithm Benchmark Comparison</h3>
+                <div class="card-subtitle">Evaluation on 440 held-out test split samples</div>
+              </div>
+            </div>
+          </div>
+
+          <table style="width: 100%; border-collapse: collapse; font-size: 0.9rem; margin-top: 0.5rem;">
+            <thead>
+              <tr style="border-bottom: 1px solid var(--border-subtle); text-align: left; color: var(--text-muted);">
+                <th style="padding: 0.75rem 0.5rem;">Algorithm</th>
+                <th style="padding: 0.75rem 0.5rem;">Test Accuracy</th>
+                <th style="padding: 0.75rem 0.5rem;">5-Fold CV</th>
+                <th style="padding: 0.75rem 0.5rem;">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 0.5rem; font-weight: 700; color: var(--brand-emerald-light);">
+                  🌲 Random Forest
+                </td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono); font-weight: 700;">99.55%</td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono);">99.59% ± 0.3%</td>
+                <td style="padding: 0.85rem 0.5rem;"><span class="alignment-status-badge badge-optimal">Production</span></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--border-subtle);">
+                <td style="padding: 0.85rem 0.5rem; font-weight: 600;">
+                  🌿 Decision Tree
+                </td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono);">97.95%</td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono);">98.77% ± 0.7%</td>
+                <td style="padding: 0.85rem 0.5rem;"><span class="alignment-status-badge badge-warning">Baseline</span></td>
+              </tr>
+              <tr>
+                <td style="padding: 0.85rem 0.5rem; font-weight: 600;">
+                  📈 Logistic Regression
+                </td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono);">95.00%</td>
+                <td style="padding: 0.85rem 0.5rem; font-family: var(--font-mono);">97.36% ± 0.2%</td>
+                <td style="padding: 0.85rem 0.5rem;"><span class="alignment-status-badge badge-warning">Linear</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="advisory-box" style="margin-top: 1.5rem; margin-bottom: 0;">
+            <div class="advisory-title">💡 Why Random Forest Wins:</div>
+            <p class="advisory-text">
+              Agricultural crop requirements involve non-linear step thresholds (e.g. coffee requires cool misty slopes, whilst rice requires flood levels of rainfall and humidity). Random Forest ensemble captures these multi-dimensional boundary splits without overfitting.
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- ==================== TAB 4: API & VERCEL DOCS ==================== -->
+    <div class="tab-content" id="tab-api">
+      
+      <section class="hero-section">
+        <div class="hero-pill">
+          <span>⚡</span> Serverless Microservice Architecture
+        </div>
+        <h2 class="hero-title">
+          Vercel Deployment & <span>API Integration</span>
+        </h2>
+        <p class="hero-desc">
+          Easily deploy to Vercel in 1 click or integrate CropPulse AI into external IoT soil probes, drone telemetry, and mobile farm management systems.
+        </p>
+      </section>
+
+      <div class="predictor-grid" style="grid-template-columns: 1fr 1fr;">
+        
+        <!-- Deploy on Vercel Guide -->
+        <div class="card-glass">
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <div class="card-icon-pill climate">▲</div>
+              <div>
+                <h3 class="card-title">How to Deploy to Vercel</h3>
+                <div class="card-subtitle">Zero-config serverless deployment instructions</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.88rem; line-height: 1.7; color: var(--text-secondary);">
+            <ol style="margin-left: 1.25rem; margin-bottom: 1.25rem;">
+              <li style="margin-bottom: 0.5rem;">
+                <strong>Push to GitHub:</strong> Commit and push the project to your GitHub repository.
+              </li>
+              <li style="margin-bottom: 0.5rem;">
+                <strong>Import to Vercel:</strong> Go to <a href="https://vercel.com/new" target="_blank" rel="noopener" style="color: var(--brand-emerald-light);">vercel.com/new</a> and select your repository.
+              </li>
+              <li style="margin-bottom: 0.5rem;">
+                <strong>Zero Configuration Needed:</strong> The preconfigured <code>vercel.json</code>, <code>api/index.py</code>, and <code>requirements.txt</code> automatically handle the serverless function routing and static asset CDN.
+              </li>
+              <li style="margin-bottom: 0.5rem;">
+                <strong>Click Deploy:</strong> In ~60 seconds, your production URL will be live with instant global edge caching!
+              </li>
+            </ol>
+          </div>
+
+          <div class="advisory-box" style="margin-bottom: 0;">
+            <div class="advisory-title">🚀 Dual-Engine Serverless Guarantee:</div>
+            <p class="advisory-text">
+              The API uses a dual-engine architecture: primary <code>scikit-learn</code> model with an instant pure-Python JSON tree evaluator fallback. This ensures 0% cold start downtime and 100% uptime on Vercel's serverless tier.
+            </p>
+          </div>
+        </div>
+
+        <!-- API Endpoint Reference & Code -->
+        <div class="card-glass">
+          <div class="card-header-flex">
+            <div class="card-title-group">
+              <div class="card-icon-pill soil">🔌</div>
+              <div>
+                <h3 class="card-title">POST /api/predict</h3>
+                <div class="card-subtitle">Send soil & climate parameters, receive crop advisory</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">
+            Example Request (cURL):
+          </div>
+          <div class="code-block">
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy', 2000);">Copy</button>
+            <pre><code>curl -X POST "https://your-app.vercel.app/api/predict" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "N": 90,
+    "P": 42,
+    "K": 43,
+    "temperature": 24.5,
+    "humidity": 82.0,
+    "ph": 6.5,
+    "rainfall": 202.9
+  }'</code></pre>
+          </div>
+
+          <div style="font-size: 0.82rem; font-weight: 600; color: var(--text-muted); margin-bottom: 0.4rem;">
+            Python (requests):
+          </div>
+          <div class="code-block">
+            <button class="copy-btn" onclick="navigator.clipboard.writeText(this.nextElementSibling.innerText); this.innerText='Copied!'; setTimeout(()=>this.innerText='Copy', 2000);">Copy</button>
+            <pre><code>import requests
+
+res = requests.post("https://your-app.vercel.app/api/predict", json={
+    "N": 90, "P": 42, "K": 43,
+    "temperature": 24.5, "humidity": 82.0,
+    "ph": 6.5, "rainfall": 202.9
+})
+data = res.json()
+print("Recommended Crop:", data['prediction']['name'])
+print("Confidence:", data['prediction']['confidence'], "%")</code></pre>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div>
+        <strong>CropPulse AI</strong> — Precision Agriculture & Smart Farming Advisory System
+      </div>
+      <div style="font-size: 0.78rem; margin-top: 0.25rem;">
+        Model Accuracy: 99.55% • Dual-Engine ML Pipeline • Vercel Serverless Ready
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/anikdey095/crop-recommendation" target="_blank" rel="noopener">GitHub Repository</a>
+        <a href="#tab-api" onclick="document.getElementById('tab-btn-api').click();">API Docs</a>
+        <a href="#tab-analytics" onclick="document.getElementById('tab-btn-analytics').click();">Model Analytics</a>
+        <a href="#tab-encyclopedia" onclick="document.getElementById('tab-btn-encyclopedia').click();">Crop Directory</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Main Application Logic -->
+  <script src="app.js"></script>
+</body>
+</html>

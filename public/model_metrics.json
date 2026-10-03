@@ -1,0 +1,101 @@
+{
+  "model_name": "Random Forest Ensemble (80 Trees, Max Depth 16)",
+  "test_accuracy": 99.55,
+  "f1_score": 99.55,
+  "total_samples": 2200,
+  "num_crops": 22,
+  "crops": [
+    "apple",
+    "banana",
+    "blackgram",
+    "chickpea",
+    "coconut",
+    "coffee",
+    "cotton",
+    "grapes",
+    "jute",
+    "kidneybeans",
+    "lentil",
+    "maize",
+    "mango",
+    "mothbeans",
+    "mungbean",
+    "muskmelon",
+    "orange",
+    "papaya",
+    "pigeonpeas",
+    "pomegranate",
+    "rice",
+    "watermelon"
+  ],
+  "feature_importances": {
+    "rainfall": 23.39,
+    "humidity": 22.55,
+    "K": 17.49,
+    "P": 15.04,
+    "N": 9.5,
+    "temperature": 7.27,
+    "ph": 4.76
+  },
+  "model_comparison": {
+    "Decision Tree": {
+      "test_accuracy": 97.95,
+      "cv_mean_accuracy": 98.77,
+      "cv_std": 0.683
+    },
+    "Logistic Regression": {
+      "test_accuracy": 95.0,
+      "cv_mean_accuracy": 97.36,
+      "cv_std": 0.182
+    },
+    "Random Forest": {
+      "test_accuracy": 99.55,
+      "cv_mean_accuracy": 99.59,
+      "cv_std": 0.334
+    }
+  },
+  "dataset_ranges": {
+    "N": {
+      "min": 0.0,
+      "max": 140.0,
+      "mean": 50.6,
+      "median": 37.0
+    },
+    "P": {
+      "min": 5.0,
+      "max": 145.0,
+      "mean": 53.4,
+      "median": 51.0
+    },
+    "K": {
+      "min": 5.0,
+      "max": 205.0,
+      "mean": 48.1,
+      "median": 32.0
+    },
+    "temperature": {
+      "min": 8.825674745,
+      "max": 43.67549305,
+      "mean": 25.6,
+      "median": 25.6
+    },
+    "humidity": {
+      "min": 14.25803981,
+      "max": 99.98187601,
+      "mean": 71.5,
+      "median": 80.5
+    },
+    "ph": {
+      "min": 3.504752314,
+      "max": 9.93509073,
+      "mean": 6.5,
+      "median": 6.4
+    },
+    "rainfall": {
+      "min": 20.21126747,
+      "max": 298.5601175,
+      "mean": 103.5,
+      "median": 94.9
+    }
+  }
+}

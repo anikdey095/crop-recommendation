@@ -1,0 +1,16 @@
+.git
+.github
+*.ipynb
+*.ipynb_checkpoints
+data.csv
+train.py
+test_app.py
+__pycache__
+*.pyc
+*.pyo
+.pytest_cache
+.vscode
+.idea
+venv
+env
+.env
